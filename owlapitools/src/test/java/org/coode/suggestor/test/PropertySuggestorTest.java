@@ -31,7 +31,7 @@ import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 
-public class PropertySuggestorTests extends AbstractSuggestorTest {
+public class PropertySuggestorTest extends AbstractSuggestorTest {
 	OWLClass ca, cb, cc, cd, ce, cf;
 	OWLObjectProperty op, oq, or, os, ot;
 	OWLDataProperty dx, dy, z;

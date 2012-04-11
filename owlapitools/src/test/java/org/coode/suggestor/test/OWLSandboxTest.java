@@ -22,7 +22,7 @@ import org.semanticweb.owlapi.model.OWLObjectComplementOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-public class OWLSandbox extends TestCase {
+public class OWLSandboxTest extends TestCase {
 	public void testNNF() {
 		OWLOntologyManager mngr = OWLManager.createOWLOntologyManager();
 		OWLDataFactory df = mngr.getOWLDataFactory();

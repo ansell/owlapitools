@@ -29,7 +29,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.vocab.OWLFacet;
 
-public class FillerSuggestorTests extends AbstractSuggestorTest {
+public class FillerSuggestorTest extends AbstractSuggestorTest {
 	private OWLClass ca, cb, cc, cd, ce, ca1, cb1, cc1;
 	private OWLObjectProperty oa, ob, ob1;
 	private OWLDataProperty da;
@@ -87,19 +87,19 @@ public class FillerSuggestorTests extends AbstractSuggestorTest {
 		FillerSuggestor fs = fac.getFillerSuggestor();
 		OWLDataFactory f = fs.getReasoner().getRootOntology().getOWLOntologyManager()
 				.getOWLDataFactory();
-		System.out.println("FillerSuggestorTests.testIsCurrentFiller()\n"
+		System.out.println("FillerSuggestorTest.testIsCurrentFiller()\n"
 				+ fs.getReasoner().getRootOntology().getAxioms().toString()
 						.replace(",", ",\n\t"));
 		System.out
-				.println("FillerSuggestorTests.testIsCurrentFiller() subclasses of thing \n"
+				.println("FillerSuggestorTest.testIsCurrentFiller() subclasses of thing \n"
 						+ fs.getReasoner().getSubClasses(f.getOWLThing(), true));
 		System.out
-				.println("FillerSuggestorTests.testIsCurrentFiller() subclasses of thing \n"
+				.println("FillerSuggestorTest.testIsCurrentFiller() subclasses of thing \n"
 						+ fs.getReasoner().getSubClasses(f.getOWLThing(), false));
 		//TODO add a generic reasoner to implement these tests
 		// OWLReasoner test=new JFactFactory().createReasoner(fs.getReasoner().getRootOntology());
-		//        System.out.println("FillerSuggestorTests.testIsCurrentFiller() subclasses of thing test \n"+test.getSubClasses(f.getOWLThing(), true));
-		//        System.out.println("FillerSuggestorTests.testIsCurrentFiller() subclasses of thing test\n"+test.getSubClasses(f.getOWLThing(), false));
+		//        System.out.println("FillerSuggestorTest.testIsCurrentFiller() subclasses of thing test \n"+test.getSubClasses(f.getOWLThing(), true));
+		//        System.out.println("FillerSuggestorTest.testIsCurrentFiller() subclasses of thing test\n"+test.getSubClasses(f.getOWLThing(), false));
 		assertTrue(fs.isCurrent(ca, oa, cb1, true));
 		assertFalse(fs.isCurrent(ca, oa, cb, true));
 		assertFalse(fs.isCurrent(ca, oa,

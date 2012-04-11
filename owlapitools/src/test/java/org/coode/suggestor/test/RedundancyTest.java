@@ -31,7 +31,7 @@ import org.semanticweb.owlapi.reasoner.BufferingMode;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 
-public class RedundancyTests extends AbstractSuggestorTest {
+public class RedundancyTest extends AbstractSuggestorTest {
 	public void testFilterClasses() throws Exception {
 		OWLOntology ont = createOntology();
 		OWLReasoner r = ((OWLReasonerFactory) Class.forName(DEFAULT_REASONER_FACTORY)

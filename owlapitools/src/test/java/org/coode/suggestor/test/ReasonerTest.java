@@ -26,7 +26,7 @@ import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 
-public class ReasonerTests extends TestCase {
+public class ReasonerTest extends TestCase {
 	public static final String JFACT_FACTORY = "uk.ac.manchester.cs.jfact.JFactFactory";
 
 	//    public static final String HERMIT_FACTORY =       "org.semanticweb.HermiT.Reasoner$ReasonerFactory";

@@ -25,7 +25,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.vocab.OWLFacet;
 
-public class UtilTests extends AbstractSuggestorTest {
+public class UtilTest extends AbstractSuggestorTest {
 	public void testGetSubDatatypes() throws Exception {
 		OWLOntology ont = createOntology();
 		OWLReasoner r = ((OWLReasonerFactory) Class.forName(DEFAULT_REASONER_FACTORY)
