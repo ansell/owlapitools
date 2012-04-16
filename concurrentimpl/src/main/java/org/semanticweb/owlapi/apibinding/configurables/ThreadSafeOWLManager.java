@@ -120,18 +120,6 @@ import de.uulm.ecs.ai.owlapi.krssrenderer.KRSS2OWLSyntaxOntologyStorer;
  */
 public class ThreadSafeOWLManager implements OWLOntologyManagerFactory {
 	private static OWLImplementationBinding binding = new ThreadSafeBinding();
-	static {
-		// Register useful parsers
-		OWLParserFactoryRegistry registry = OWLParserFactoryRegistry
-				.getInstance();
-		registry.registerParserFactory(new ManchesterOWLSyntaxParserFactory());
-		registry.registerParserFactory(new KRSS2OWLParserFactory());
-		registry.registerParserFactory(new OBOParserFactory());
-		registry.registerParserFactory(new TurtleOntologyParserFactory());
-		registry.registerParserFactory(new OWLFunctionalSyntaxParserFactory());
-		registry.registerParserFactory(new OWLXMLParserFactory());
-		registry.registerParserFactory(new RDFXMLParserFactory());
-	}
 
 	public OWLOntologyManager buildOWLOntologyManager() {
 
