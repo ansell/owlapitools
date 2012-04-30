@@ -25,6 +25,7 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactoryRegistry;
 
 public class ReasonerTest extends TestCase {
 	public static final String JFACT_FACTORY = "uk.ac.manchester.cs.jfact.JFactFactory";
@@ -34,8 +35,7 @@ public class ReasonerTest extends TestCase {
 	public void testReasoner() throws Exception {
 		OWLOntologyManager mngr = OWLManager.createOWLOntologyManager();
 		OWLOntology ont = mngr.createOntology();
-		final OWLReasonerFactory fac = (OWLReasonerFactory) Class.forName(JFACT_FACTORY)
-				.newInstance();
+		final OWLReasonerFactory fac = OWLReasonerFactoryRegistry.getInstance().get("JFact").iterator().next();
 		OWLReasoner r = fac.createNonBufferingReasoner(ont);
 		OWLDataFactory df = mngr.getOWLDataFactory();
 		OWLClass a = df.getOWLClass(IRI.create("http://example.com/a"));

@@ -1,11 +1,13 @@
 package utils.cachedreasoner;
 
+import org.kohsuke.MetaInfServices;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 
+@MetaInfServices(org.semanticweb.owlapi.reasoner.OWLReasonerFactory.class)
 public class CachedReasonerFactory implements OWLReasonerFactory {
 	private final OWLReasonerFactory f;
 

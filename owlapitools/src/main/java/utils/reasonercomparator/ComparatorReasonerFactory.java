@@ -8,20 +8,23 @@
  */
 package utils.reasonercomparator;
 
+import org.kohsuke.MetaInfServices;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactoryRegistry;
 
+@MetaInfServices(org.semanticweb.owlapi.reasoner.OWLReasonerFactory.class)
 public class ComparatorReasonerFactory implements OWLReasonerFactory {
-	public static final String HERMIT = "org.semanticweb.HermiT.Reasoner.ReasonerFactory";
-	public static final String FACT = "uk.ac.manchester.cs.factplusplus.owlapiv3.FaCTPlusPlusReasonerFactory";
-	public static final String JFACT = "uk.ac.manchester.cs.jfact.JFactFactory";
+	public static final String HERMIT = "HermiT";
+	public static final String FACT = "FaCT++";
+	public static final String JFACT = "JFact";
 
 	private static OWLReasonerFactory getFactory(String s) {
 		try {
-			return (OWLReasonerFactory) Class.forName(s).newInstance();
+			return OWLReasonerFactoryRegistry.getInstance().get(s).iterator().next();
 		} catch (Exception e) {
 			throw new RuntimeException("Problem instantiating factory: " + s, e);
 		}
