@@ -91,13 +91,18 @@ public class AlternateParsableOWLOntologyFactory extends AlternateAbstractInMemO
 
     private final static Set<String> parsableSchemes= new HashSet<String>(Arrays.asList("http","https","file","ftp"));
 
+    private OWLParserFactoryRegistry parserRegistry;
+
     /**
      * Creates an ontology factory.
      */
     public AlternateParsableOWLOntologyFactory() {
     }
 
-
+    public AlternateParsableOWLOntologyFactory(OWLParserFactoryRegistry nextParserRegistry) {
+        parserRegistry = nextParserRegistry;
+    }
+    
 //    @Override
 //	public void setOWLOntologyManager(OWLOntologyManager owlOntologyManager) {
 //        super.setOWLOntologyManager(owlOntologyManager);
@@ -111,13 +116,13 @@ public class AlternateParsableOWLOntologyFactory extends AlternateAbstractInMemO
     @SuppressWarnings("deprecation")
     public List<OWLParser> getParsers() {
         List<OWLParser> parsers = new ArrayList<OWLParser>();
-        List<OWLParserFactory> factories = OWLParserFactoryRegistry.getInstance().getParserFactories();
-        for (OWLParserFactory factory : factories) {
-            OWLParser parser = factory.createParser(getOWLOntologyManager());
+        List<OWLParserFactory> factories = this.parserRegistry.getParserFactories();
+        for (int i = 0; i < factories.size(); i++) {
+            OWLParser parser = factories.get(i).createParser(getOWLOntologyManager());
             parser.setOWLOntologyManager(getOWLOntologyManager());
-            parsers.add(parser);
+            parsers.add(i, parser);
         }
-        return new ArrayList<OWLParser>(parsers);
+        return parsers;
     }
 
 
