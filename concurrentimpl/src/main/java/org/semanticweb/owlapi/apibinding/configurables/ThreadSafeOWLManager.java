@@ -83,6 +83,8 @@ package org.semanticweb.owlapi.apibinding.configurables;/*
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+import java.util.List;
+
 import org.coode.owlapi.functionalparser.OWLFunctionalSyntaxParserFactory;
 import org.coode.owlapi.functionalrenderer.OWLFunctionalSyntaxOntologyStorer;
 import org.coode.owlapi.latex.LatexOntologyStorer;
@@ -98,6 +100,9 @@ import org.semanticweb.owlapi.io.OWLParserFactoryRegistry;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyManagerFactory;
+import org.semanticweb.owlapi.model.OWLOntologyStorer;
+import org.semanticweb.owlapi.model.OWLOntologyStorerFactory;
+import org.semanticweb.owlapi.model.OWLOntologyStorerFactoryRegistry;
 import org.semanticweb.owlapi.util.NonMappingOntologyIRIMapper;
 
 import uk.ac.manchester.cs.owl.owlapi.alternateimpls.AlternateEmptyInMemOWLOntologyFactory;
@@ -158,29 +163,35 @@ public class ThreadSafeOWLManager implements OWLOntologyManagerFactory {
 		binding = b;
 	}
 
-	/**
-	 * Creates an OWL ontology manager that is configured with standard parsers,
-	 * storeres etc.
-	 *
-	 * @param dataFactory
-	 *            The data factory that the manager should have a reference to.
-	 * @return The manager.
-	 */
-	public static OWLOntologyManager createOWLOntologyManager(
-			OWLDataFactory dataFactory) {
-		// Create the ontology manager and add ontology factories, mappers and storers
+    /**
+     * Creates an OWL ontology manager that is configured with standard parsers,
+     * storers etc.
+     *
+     * @param dataFactory The data factory that the manager should have a reference to.
+     * @return The manager.
+     */
+    public static OWLOntologyManager createOWLOntologyManager(OWLDataFactory dataFactory) {
+        return createOWLOntologyManager(dataFactory, OWLOntologyStorerFactoryRegistry.getInstance(), OWLParserFactoryRegistry.getInstance());
+    }
+    
+    /**
+     * Creates an OWL ontology manager that is configured with standard parsers,
+     * storers etc.
+     *
+     * @param dataFactory The data factory that the manager should have a reference to.
+     * @param storerRegistry The OWLOntologyStorer registry to use to define valid ontology storing options for the returned OWLOntologyManager
+     * @param parserRegistry The OWLParser registry to use to define valid ontology storing options for the returned OWLOntologyManager
+     * @return The manager.
+     */
+    public static OWLOntologyManager createOWLOntologyManager(OWLDataFactory dataFactory, OWLOntologyStorerFactoryRegistry storerRegistry, OWLParserFactoryRegistry parserRegistry) {
+        // Create the ontology manager and add ontology factories, mappers and storers
+	    // Create the ontology manager and add ontology factories, mappers and storers
 		OWLOntologyManager ontologyManager = binding
 				.getOWLOntologyManager(dataFactory);
-		ontologyManager.addOntologyStorer(new RDFXMLOntologyStorer());
-		ontologyManager.addOntologyStorer(new OWLXMLOntologyStorer());
-		ontologyManager
-				.addOntologyStorer(new OWLFunctionalSyntaxOntologyStorer());
-		ontologyManager
-				.addOntologyStorer(new ManchesterOWLSyntaxOntologyStorer());
-		ontologyManager.addOntologyStorer(new OBOFlatFileOntologyStorer());
-		ontologyManager.addOntologyStorer(new KRSS2OWLSyntaxOntologyStorer());
-		ontologyManager.addOntologyStorer(new TurtleOntologyStorer());
-		ontologyManager.addOntologyStorer(new LatexOntologyStorer());
+        List<OWLOntologyStorerFactory> allFactories = storerRegistry.getStorerFactories();
+        addOntologyStorers(ontologyManager, allFactories);
+
+
 		ontologyManager.addIRIMapper(new NonMappingOntologyIRIMapper());
 		ontologyManager
 				.addOntologyFactory(new AlternateEmptyInMemOWLOntologyFactory());
@@ -189,6 +200,15 @@ public class ThreadSafeOWLManager implements OWLOntologyManagerFactory {
 		return ontologyManager;
 	}
 
+    private static void addOntologyStorers(OWLOntologyManager ontologyManager, List<OWLOntologyStorerFactory> storerFactories) {
+        if(storerFactories != null) {
+            for(OWLOntologyStorerFactory nextFactory : storerFactories) {
+                OWLOntologyStorer createdStorer = nextFactory.createStorer();
+                ontologyManager.addOntologyStorer(createdStorer);
+            }
+        }
+    }
+    
 	/**
 	 * Gets a global data factory that can be used to create OWL API objects.
 	 *
