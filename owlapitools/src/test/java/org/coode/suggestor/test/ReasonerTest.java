@@ -107,8 +107,7 @@ public class ReasonerTest extends TestCase {
 	public void testReasoner4() throws Exception {
 		OWLOntologyManager mngr = OWLManager.createOWLOntologyManager();
 		OWLOntology ont = mngr.createOntology();
-		final OWLReasonerFactory fac = (OWLReasonerFactory) Class.forName(JFACT_FACTORY)
-				.newInstance();
+        final OWLReasonerFactory fac = OWLReasonerFactoryRegistry.getInstance().get("JFact").iterator().next();
 		OWLReasoner r = fac.createNonBufferingReasoner(ont);
 		assertFalse(r.getTopDataPropertyNode().getEntities().isEmpty());
 	}
