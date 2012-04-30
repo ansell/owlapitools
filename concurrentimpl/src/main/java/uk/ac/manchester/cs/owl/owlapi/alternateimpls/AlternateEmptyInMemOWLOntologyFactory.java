@@ -39,7 +39,7 @@
 
 package uk.ac.manchester.cs.owl.owlapi.alternateimpls;
 
-import org.semanticweb.owlapi.io.DefaultOntologyFormat;
+import org.semanticweb.owlapi.formats.DefaultOntologyFormat;
 import org.semanticweb.owlapi.io.OWLOntologyDocumentSource;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
