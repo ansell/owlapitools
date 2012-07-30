@@ -5,23 +5,21 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Bag<Type> {
-	Map<Type, AtomicLong> map = new LinkedHashMap<Type, AtomicLong>();
+	ConcurrentMap<Type, AtomicLong> map = new ConcurrentHashMap<Type, AtomicLong>();
 
 	public Bag() {}
 
 	public long add(Type t) {
-		AtomicLong l = map.get(t);
-		if (l != null) {
-			return l.incrementAndGet();
+	    AtomicLong putIfAbsent = map.putIfAbsent(t, new AtomicLong(1));
+		if (putIfAbsent != null) {
+			return putIfAbsent.incrementAndGet();
 		} else {
-			map.put(t, new AtomicLong(1));
 			return 1;
 		}
 	}
@@ -49,13 +47,14 @@ public class Bag<Type> {
 	}
 
 	public Collection<Type> list() {
-		return map.keySet();
+		return Collections.unmodifiableSet(map.keySet());
 	}
 
 	public long[] values(){
-		long[] toReturn=new long[map.values().size()];
+		List<AtomicLong> values = new ArrayList<AtomicLong>(map.values());
+        long[] toReturn=new long[values.size()];
 		int i=0;
-		for(AtomicLong l:map.values()) {
+		for(AtomicLong l:values) {
 			toReturn[i++]=l.get();
 		}
 		Arrays.sort(toReturn);

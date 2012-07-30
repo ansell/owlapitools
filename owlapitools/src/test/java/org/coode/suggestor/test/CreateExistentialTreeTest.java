@@ -19,6 +19,7 @@ import java.util.TreeSet;
 import org.coode.suggestor.api.FillerSuggestor;
 import org.coode.suggestor.api.PropertySuggestor;
 import org.coode.suggestor.impl.SuggestorFactory;
+import org.junit.Assert;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
@@ -30,6 +31,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.reasoner.Node;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactoryRegistry;
 
 public class CreateExistentialTreeTest extends AbstractSuggestorTest {
 	private final Set<Node<OWLClass>> visited = new HashSet<Node<OWLClass>>();
@@ -42,8 +44,9 @@ public class CreateExistentialTreeTest extends AbstractSuggestorTest {
 
 	public void testCreateTree() throws Exception {
 		OWLOntology ont = createOntology();
-		OWLReasoner r = ((OWLReasonerFactory) Class.forName(DEFAULT_REASONER_FACTORY)
-				.newInstance()).createNonBufferingReasoner(ont);
+        final OWLReasonerFactory reasonerFactory = OWLReasonerFactoryRegistry.getInstance().getReasonerFactory("JFact");
+        Assert.assertNotNull("Unable to find JFact reasoner for testing", reasonerFactory);
+        OWLReasoner r = reasonerFactory.createNonBufferingReasoner(ont);
 		SuggestorFactory fac = new SuggestorFactory(r);
 		PropertySuggestor ps = fac.getPropertySuggestor();
 		FillerSuggestor fs = fac.getFillerSuggestor();

@@ -14,6 +14,7 @@ package org.coode.suggestor.test;
 
 import junit.framework.TestCase;
 
+import org.junit.Assert;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
@@ -22,6 +23,7 @@ import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyManagerFactoryRegistry;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
@@ -33,9 +35,11 @@ public class ReasonerTest extends TestCase {
 	//    public static final String HERMIT_FACTORY =       "org.semanticweb.HermiT.Reasoner$ReasonerFactory";
 	//    public static final String PELLET_FACTORY =       "com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory";
 	public void testReasoner() throws Exception {
-		OWLOntologyManager mngr = OWLManager.createOWLOntologyManager();
+		OWLOntologyManager mngr = OWLOntologyManagerFactoryRegistry.createOWLOntologyManager();
 		OWLOntology ont = mngr.createOntology();
-		final OWLReasonerFactory fac = OWLReasonerFactoryRegistry.getInstance().get("JFact").iterator().next();
+		final OWLReasonerFactory fac = OWLReasonerFactoryRegistry.getInstance().getReasonerFactory("JFact");
+		Assert.assertNotNull("Unable to find JFact reasoner for testing", fac);
+		
 		OWLReasoner r = fac.createNonBufferingReasoner(ont);
 		OWLDataFactory df = mngr.getOWLDataFactory();
 		OWLClass a = df.getOWLClass(IRI.create("http://example.com/a"));
@@ -107,7 +111,8 @@ public class ReasonerTest extends TestCase {
 	public void testReasoner4() throws Exception {
 		OWLOntologyManager mngr = OWLManager.createOWLOntologyManager();
 		OWLOntology ont = mngr.createOntology();
-        final OWLReasonerFactory fac = OWLReasonerFactoryRegistry.getInstance().get("JFact").iterator().next();
+        final OWLReasonerFactory fac = OWLReasonerFactoryRegistry.getInstance().getReasonerFactory("JFact");
+        Assert.assertNotNull("Unable to find JFact reasoner for testing", fac);
 		OWLReasoner r = fac.createNonBufferingReasoner(ont);
 		assertFalse(r.getTopDataPropertyNode().getEntities().isEmpty());
 	}

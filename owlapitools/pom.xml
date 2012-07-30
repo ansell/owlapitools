@@ -21,14 +21,15 @@
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-apibinding</artifactId>
+			<artifactId>owlapi-rio</artifactId>
 		</dependency>
+        <dependency>
+        	<groupId>org.openrdf.sesame</groupId>
+        	<artifactId>sesame-rio-rdfxml</artifactId>
+        	<scope>test</scope>
+        </dependency>
 		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-impl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.owlapitools</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>concurrentimpl</artifactId>
 			<version>${project.version}</version>
 		</dependency>

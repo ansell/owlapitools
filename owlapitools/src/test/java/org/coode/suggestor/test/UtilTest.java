@@ -15,6 +15,7 @@ package org.coode.suggestor.test;
 import java.util.Arrays;
 
 import org.coode.suggestor.util.ReasonerHelper;
+import org.junit.Assert;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLDataProperty;
@@ -23,13 +24,15 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactoryRegistry;
 import org.semanticweb.owlapi.vocab.OWLFacet;
 
 public class UtilTest extends AbstractSuggestorTest {
 	public void testGetSubDatatypes() throws Exception {
 		OWLOntology ont = createOntology();
-		OWLReasoner r = ((OWLReasonerFactory) Class.forName(DEFAULT_REASONER_FACTORY)
-				.newInstance()).createNonBufferingReasoner(ont);
+        final OWLReasonerFactory reasonerFactory = OWLReasonerFactoryRegistry.getInstance().getReasonerFactory("JFact");
+        Assert.assertNotNull("Unable to find JFact reasoner for testing", reasonerFactory);
+        OWLReasoner r = reasonerFactory.createNonBufferingReasoner(ont);
 //		SuggestorFactory fac = new SuggestorFactory(r);
 //		PropertySuggestor ps = fac.getPropertySuggestor();
 //		FillerSuggestor fs = fac.getFillerSuggestor();
