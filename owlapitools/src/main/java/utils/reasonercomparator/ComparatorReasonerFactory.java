@@ -24,7 +24,7 @@ public class ComparatorReasonerFactory implements OWLReasonerFactory {
 
 	private static OWLReasonerFactory getFactory(String s) {
 		try {
-			return OWLReasonerFactoryRegistry.getInstance().get(s).iterator().next();
+			return OWLReasonerFactoryRegistry.getInstance().getReasonerFactory(s);
 		} catch (Exception e) {
 			throw new RuntimeException("Problem instantiating factory: " + s, e);
 		}
