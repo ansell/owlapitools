@@ -18,7 +18,7 @@ import java.util.TreeSet;
 
 import org.coode.suggestor.api.FillerSuggestor;
 import org.coode.suggestor.api.PropertySuggestor;
-import org.coode.suggestor.impl.SuggestorFactory;
+import org.coode.suggestor.impl.SuggestorFactoryImpl;
 import org.junit.Assert;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -47,7 +47,7 @@ public class CreateExistentialTreeTest extends AbstractSuggestorTest {
         final OWLReasonerFactory reasonerFactory = OWLReasonerFactoryRegistry.getInstance().getReasonerFactory("JFact");
         Assert.assertNotNull("Unable to find JFact reasoner for testing", reasonerFactory);
         OWLReasoner r = reasonerFactory.createNonBufferingReasoner(ont);
-		SuggestorFactory fac = new SuggestorFactory(r);
+		SuggestorFactoryImpl fac = new SuggestorFactoryImpl(r);
 		PropertySuggestor ps = fac.getPropertySuggestor();
 		FillerSuggestor fs = fac.getFillerSuggestor();
 		long start = System.currentTimeMillis();

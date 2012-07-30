@@ -18,6 +18,7 @@ import java.util.Set;
 import org.coode.suggestor.api.FillerSanctionRule;
 import org.coode.suggestor.api.FillerSuggestor;
 import org.coode.suggestor.util.ReasonerHelper;
+import org.kohsuke.MetaInfServices;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
@@ -37,7 +38,8 @@ import org.semanticweb.owlapi.reasoner.impl.OWLDatatypeNodeSet;
 /**
  * Default implementation of the FillerSuggestor.
  */
-class FillerSuggestorImpl implements FillerSuggestor {
+@MetaInfServices(org.coode.suggestor.api.FillerSuggestor.class)
+public class FillerSuggestorImpl implements FillerSuggestor {
 	protected final OWLReasoner r;
 	protected	final OWLDataFactory df;
 	protected final ReasonerHelper helper;

@@ -18,6 +18,7 @@ import java.util.Set;
 import org.coode.suggestor.api.PropertySanctionRule;
 import org.coode.suggestor.api.PropertySuggestor;
 import org.coode.suggestor.util.ReasonerHelper;
+import org.kohsuke.MetaInfServices;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
@@ -32,7 +33,8 @@ import org.semanticweb.owlapi.reasoner.impl.OWLObjectPropertyNodeSet;
 /**
  * Default implementation of the PropertySuggestor.
  */
-class PropertySuggestorImpl implements PropertySuggestor {
+@MetaInfServices(org.coode.suggestor.api.PropertySuggestor.class)
+public class PropertySuggestorImpl implements PropertySuggestor {
 	protected final OWLReasoner r;
 	protected final OWLDataFactory df;
 	protected final ReasonerHelper helper;

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.coode.suggestor.api.FillerSuggestor;
-import org.coode.suggestor.impl.SuggestorFactory;
+import org.coode.suggestor.impl.SuggestorFactoryImpl;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
@@ -82,7 +82,7 @@ public class FillerSuggestorTest extends AbstractSuggestorTest {
 		OWLOntology ont = createModelA();
 		OWLReasoner r = ((OWLReasonerFactory) Class.forName(DEFAULT_REASONER_FACTORY)
 				.newInstance()).createNonBufferingReasoner(ont);
-		SuggestorFactory fac = new SuggestorFactory(r);
+		SuggestorFactoryImpl fac = new SuggestorFactoryImpl(r);
 //		PropertySuggestor ps = fac.getPropertySuggestor();
 		FillerSuggestor fs = fac.getFillerSuggestor();
 		OWLDataFactory f = fs.getReasoner().getRootOntology().getOWLOntologyManager()
@@ -143,7 +143,7 @@ public class FillerSuggestorTest extends AbstractSuggestorTest {
 		OWLOntology ont = createModelB();
 		OWLReasoner r = ((OWLReasonerFactory) Class.forName(DEFAULT_REASONER_FACTORY)
 				.newInstance()).createNonBufferingReasoner(ont);
-		SuggestorFactory fac = new SuggestorFactory(r);
+		SuggestorFactoryImpl fac = new SuggestorFactoryImpl(r);
 //		PropertySuggestor ps = fac.getPropertySuggestor();
 		FillerSuggestor fs = fac.getFillerSuggestor();
 		assertTrue(fs.isPossible(ca, oa, ca));
@@ -160,7 +160,7 @@ public class FillerSuggestorTest extends AbstractSuggestorTest {
 		OWLOntology ont = createOntology();
 		OWLReasoner r = ((OWLReasonerFactory) Class.forName(DEFAULT_REASONER_FACTORY)
 				.newInstance()).createNonBufferingReasoner(ont);
-		SuggestorFactory fac = new SuggestorFactory(r);
+		SuggestorFactoryImpl fac = new SuggestorFactoryImpl(r);
 //		PropertySuggestor ps = fac.getPropertySuggestor();
 		FillerSuggestor fs = fac.getFillerSuggestor();
 		createEntities();
@@ -192,7 +192,7 @@ public class FillerSuggestorTest extends AbstractSuggestorTest {
 		OWLOntology ont = createModelA();
 		OWLReasoner r = ((OWLReasonerFactory) Class.forName(DEFAULT_REASONER_FACTORY)
 				.newInstance()).createNonBufferingReasoner(ont);
-		SuggestorFactory fac = new SuggestorFactory(r);
+		SuggestorFactoryImpl fac = new SuggestorFactoryImpl(r);
 //		PropertySuggestor ps = fac.getPropertySuggestor();
 		FillerSuggestor fs = fac.getFillerSuggestor();
 		NodeSet<OWLClass> pSuccessorsA = fs.getPossibleNamedFillers(ca, oa, null, false);

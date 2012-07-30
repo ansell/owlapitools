@@ -14,25 +14,30 @@ package org.coode.suggestor.impl;
 
 import org.coode.suggestor.api.FillerSuggestor;
 import org.coode.suggestor.api.PropertySuggestor;
+import org.coode.suggestor.api.SuggestorFactory;
+import org.kohsuke.MetaInfServices;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 
 /**
  * Implementation binding.
  */
-public class SuggestorFactory {
+@MetaInfServices(org.coode.suggestor.api.SuggestorFactory.class)
+public class SuggestorFactoryImpl implements SuggestorFactory {
 	private final OWLReasoner r;
 
-	public SuggestorFactory(OWLReasoner r) {
+	public SuggestorFactoryImpl(OWLReasoner r) {
 		if (r == null) {
 			throw new IllegalArgumentException("Reasoner cannot be null");
 		}
 		this.r = r;
 	}
 
+	@Override
 	public final PropertySuggestor getPropertySuggestor() {
 		return new PropertySuggestorImpl(r);
 	}
 
+    @Override
 	public final FillerSuggestor getFillerSuggestor() {
 		return new FillerSuggestorImpl(r);
 	}
