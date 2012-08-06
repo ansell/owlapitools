@@ -17,7 +17,7 @@
 	<groupId>net.sourceforge.owlapitools</groupId>
 	<artifactId>owlapitools-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>3.4-SNAPSHOT</version>
+	<version>3.5-SNAPSHOT</version>
 	<name>OWLAPITools</name>
 	<description>The OWL API is a Java API and reference implementation for creating, manipulating and serialising OWL Ontologies. The latest version of the API is focused towards OWL 2</description>
 	<url>http://sourceforge.net/projects/owlapitools/</url>
@@ -160,8 +160,8 @@
 	<!-- Specify the encoding of the source files. -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jfact.version>3.4-SNAPSHOT</jfact.version>
-		<owlapi.version>3.4-SNAPSHOT</owlapi.version>
+		<jfact.version>3.5-SNAPSHOT</jfact.version>
+		<owlapi.version>3.5-SNAPSHOT</owlapi.version>
 		<sesame.version>2.6.8</sesame.version>
 		<slf4j.version>1.6.6</slf4j.version>
 	</properties>

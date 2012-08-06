@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>net.sourceforge.owlapitools</groupId>
 		<artifactId>owlapitools-parent</artifactId>
-		<version>3.4-SNAPSHOT</version>
+		<version>3.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>owlapitools</artifactId>
 	<packaging>jar</packaging>
@@ -14,10 +14,6 @@
 		<dependency>
 			<groupId>net.sourceforge.owlapi</groupId>
 			<artifactId>owlapi-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
-			<artifactId>owlapi-reasoner</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.owlapi</groupId>
