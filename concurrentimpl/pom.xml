@@ -12,11 +12,11 @@
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
+			<groupId>com.github.ansell.owlapi</groupId>
 			<artifactId>owlapi-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>net.sourceforge.owlapi</groupId>
+			<groupId>com.github.ansell.owlapi</groupId>
 			<artifactId>owlapi-impl</artifactId>
 		</dependency>
 	</dependencies>

@@ -162,7 +162,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jfact.version>3.5-SNAPSHOT</jfact.version>
 		<owlapi.version>3.5-SNAPSHOT</owlapi.version>
-		<sesame.version>2.6.8</sesame.version>
+		<sesame.version>2.7-SNAPSHOT</sesame.version>
 		<slf4j.version>1.6.6</slf4j.version>
 	</properties>
 
@@ -177,62 +177,27 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
+				<groupId>com.github.ansell.owlapi</groupId>
 				<artifactId>owlapi-api</artifactId>
 				<version>${owlapi.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-reasoner</artifactId>
-				<version>${owlapi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
+				<groupId>com.github.ansell.owlapi</groupId>
 				<artifactId>owlapi-apibinding</artifactId>
 				<version>${owlapi.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
+				<groupId>com.github.ansell.owlapi</groupId>
 				<artifactId>owlapi-impl</artifactId>
 				<version>${owlapi.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-turtle</artifactId>
+				<groupId>com.github.ansell.owlapi</groupId>
+				<artifactId>owlapi-parsers</artifactId>
 				<version>${owlapi.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-mansyntax</artifactId>
-				<version>${owlapi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-krss</artifactId>
-				<version>${owlapi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-functional</artifactId>
-				<version>${owlapi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-latex</artifactId>
-				<version>${owlapi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-obo</artifactId>
-				<version>${owlapi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
-				<artifactId>owlapi-owlxml</artifactId>
-				<version>${owlapi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sourceforge.owlapi</groupId>
+				<groupId>com.github.ansell.owlapi</groupId>
 				<artifactId>owlapi-rio</artifactId>
 				<version>${owlapi.version}</version>
 			</dependency>
