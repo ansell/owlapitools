@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -24,6 +23,7 @@ import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyManagerFactoryRegistry;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
@@ -40,7 +40,7 @@ public class ReasonerTests {
 
     @Test
     public void testReasoner() throws Exception {
-        OWLOntologyManager mngr = OWLManager.createOWLOntologyManager();
+        OWLOntologyManager mngr = OWLOntologyManagerFactoryRegistry.createOWLOntologyManager();
         OWLOntology ont = mngr.createOntology();
         final OWLReasonerFactory fac = (OWLReasonerFactory) Class.forName(JFACT_FACTORY)
                 .newInstance();
@@ -121,7 +121,7 @@ public class ReasonerTests {
     // }
     @Test
     public void testReasoner4() throws Exception {
-        OWLOntologyManager mngr = OWLManager.createOWLOntologyManager();
+        OWLOntologyManager mngr = OWLOntologyManagerFactoryRegistry.createOWLOntologyManager();
         OWLOntology ont = mngr.createOntology();
         final OWLReasonerFactory fac = (OWLReasonerFactory) Class.forName(JFACT_FACTORY)
                 .newInstance();

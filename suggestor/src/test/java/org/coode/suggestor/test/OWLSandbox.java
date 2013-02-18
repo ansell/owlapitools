@@ -13,19 +13,19 @@
 package org.coode.suggestor.test;
 
 import org.junit.Test;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyManagerFactoryRegistry;
 
 @SuppressWarnings("javadoc")
 public class OWLSandbox {
     @Test
     public void testNNF() {
-        OWLOntologyManager mngr = OWLManager.createOWLOntologyManager();
+        OWLOntologyManager mngr = OWLOntologyManagerFactoryRegistry.createOWLOntologyManager();
         OWLDataFactory df = mngr.getOWLDataFactory();
         OWLObjectProperty p = df.getOWLObjectProperty(IRI.create("http://example.com/p"));
         OWLClass c = df.getOWLClass(IRI.create("http://example.com/c"));

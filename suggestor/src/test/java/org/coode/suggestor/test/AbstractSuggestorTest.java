@@ -14,7 +14,6 @@ package org.coode.suggestor.test;
 
 import org.junit.After;
 import org.junit.Before;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -24,6 +23,7 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyManagerFactoryRegistry;
 
 @SuppressWarnings("javadoc")
 public abstract class AbstractSuggestorTest {
@@ -38,7 +38,7 @@ public abstract class AbstractSuggestorTest {
 
     @Before
     public void setUp() {
-        mngr = OWLManager.createOWLOntologyManager();
+        mngr = OWLOntologyManagerFactoryRegistry.createOWLOntologyManager();
         df = mngr.getOWLDataFactory();
     }
 
