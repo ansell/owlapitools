@@ -8,7 +8,11 @@
  */
 package utils.reasonercomparator;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.profiles.OWLProfile;
 import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
@@ -60,4 +64,9 @@ public class ComparatorReasonerFactory implements OWLReasonerFactory {
 		return new ComparisonReasoner(ontology, config, getFactory(HERMIT),
 				getFactory(JFACT), getFactory(FACT));
 	}
+
+    @Override
+    public Set<OWLProfile> getSupportedProfiles() {
+        return Collections.emptySet();
+    }
 }

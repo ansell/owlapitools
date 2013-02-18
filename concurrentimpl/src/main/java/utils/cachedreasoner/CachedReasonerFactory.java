@@ -1,6 +1,9 @@
 package utils.cachedreasoner;
 
+import java.util.Set;
+
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.profiles.OWLProfile;
 import org.semanticweb.owlapi.reasoner.IllegalConfigurationException;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerConfiguration;
@@ -45,4 +48,8 @@ public class CachedReasonerFactory implements OWLReasonerFactory {
 			OWLReasonerConfiguration config) throws IllegalConfigurationException {
 		return new CachedOWLReasoner( f.createReasoner(ontology, config), ontology.getOWLOntologyManager());
 	}
+    @Override
+    public Set<OWLProfile> getSupportedProfiles() {
+        return f.getSupportedProfiles();
+    }
 }
