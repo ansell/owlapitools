@@ -83,29 +83,19 @@ package org.semanticweb.owlapi.apibinding.configurables;/*
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-import org.coode.owlapi.functionalparser.OWLFunctionalSyntaxParserFactory;
-import org.coode.owlapi.functionalrenderer.OWLFunctionalSyntaxOntologyStorer;
-import org.coode.owlapi.latex.LatexOntologyStorer;
-import org.coode.owlapi.manchesterowlsyntax.ManchesterOWLSyntaxParserFactory;
-import org.coode.owlapi.obo.parser.OBOParserFactory;
-import org.coode.owlapi.obo.renderer.OBOFlatFileOntologyStorer;
-import org.coode.owlapi.owlxml.renderer.OWLXMLOntologyStorer;
-import org.coode.owlapi.owlxmlparser.OWLXMLParserFactory;
-import org.coode.owlapi.rdf.rdfxml.RDFXMLOntologyStorer;
-import org.coode.owlapi.rdfxml.parser.RDFXMLParserFactory;
-import org.coode.owlapi.turtle.TurtleOntologyStorer;
 import org.semanticweb.owlapi.io.OWLParserFactoryRegistry;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyManagerFactory;
+import org.semanticweb.owlapi.model.OWLOntologyStorer;
+import org.semanticweb.owlapi.model.OWLOntologyStorerFactory;
+import org.semanticweb.owlapi.model.OWLOntologyStorerFactoryRegistry;
 import org.semanticweb.owlapi.util.NonMappingOntologyIRIMapper;
 
 import uk.ac.manchester.cs.owl.owlapi.alternateimpls.AlternateEmptyInMemOWLOntologyFactory;
 import uk.ac.manchester.cs.owl.owlapi.alternateimpls.AlternateParsableOWLOntologyFactory;
-import uk.ac.manchester.cs.owl.owlapi.mansyntaxrenderer.ManchesterOWLSyntaxOntologyStorer;
-import uk.ac.manchester.cs.owl.owlapi.turtle.parser.TurtleOntologyParserFactory;
-import de.uulm.ecs.ai.owlapi.krssparser.KRSS2OWLParserFactory;
-import de.uulm.ecs.ai.owlapi.krssrenderer.KRSS2OWLSyntaxOntologyStorer;
+
+import java.util.List;
 
 /**
  * Author: Matthew Horridge<br>
@@ -120,35 +110,30 @@ import de.uulm.ecs.ai.owlapi.krssrenderer.KRSS2OWLSyntaxOntologyStorer;
  */
 public class ThreadSafeOWLManager implements OWLOntologyManagerFactory {
 	private static OWLImplementationBinding binding = new ThreadSafeBinding();
-	static {
-		// Register useful parsers
-		OWLParserFactoryRegistry registry = OWLParserFactoryRegistry
-				.getInstance();
-		registry.registerParserFactory(new ManchesterOWLSyntaxParserFactory());
-		registry.registerParserFactory(new KRSS2OWLParserFactory());
-		registry.registerParserFactory(new OBOParserFactory());
-		registry.registerParserFactory(new TurtleOntologyParserFactory());
-		registry.registerParserFactory(new OWLFunctionalSyntaxParserFactory());
-		registry.registerParserFactory(new OWLXMLParserFactory());
-		registry.registerParserFactory(new RDFXMLParserFactory());
-	}
 
-	@Override
+    @Override
     public OWLOntologyManager buildOWLOntologyManager() {
-
-    	return createOWLOntologyManager();
+        return createOWLOntologyManager();
     }
+    
     @Override
     public OWLOntologyManager buildOWLOntologyManager(OWLDataFactory f) {
-
-    	return createOWLOntologyManager(f);
+        return createOWLOntologyManager(f);
     }
-
+    
     @Override
     public OWLDataFactory getFactory() {
-
-    	return getOWLDataFactory();
+        return getOWLDataFactory();
     }
+    
+    @Override
+    public OWLOntologyManager buildOWLOntologyManager(
+            OWLDataFactory dataFactory, 
+            OWLOntologyStorerFactoryRegistry storerRegistry, 
+            OWLParserFactoryRegistry parserRegistry) {
+        return createOWLOntologyManager(dataFactory, storerRegistry, parserRegistry);
+    }
+    
 	/**
 	 * Creates an OWL ontology manager that is configured with standard parsers,
 	 * storeres etc.
@@ -183,25 +168,43 @@ public class ThreadSafeOWLManager implements OWLOntologyManagerFactory {
 	 */
 	public static OWLOntologyManager createOWLOntologyManager(
 			OWLDataFactory dataFactory) {
+		return createOWLOntologyManager(dataFactory, OWLOntologyStorerFactoryRegistry.getInstance(), OWLParserFactoryRegistry.getInstance());
+	}
+
+	/**
+	 * Creates an OWL ontology manager that is configured with standard parsers,
+	 * storeres etc.
+	 *
+	 * @param dataFactory
+	 *            The data factory that the manager should have a reference to.
+	 * @return The manager.
+	 */
+	public static OWLOntologyManager createOWLOntologyManager(
+			OWLDataFactory dataFactory,
+			OWLOntologyStorerFactoryRegistry storerRegistry,
+			OWLParserFactoryRegistry parserRegistry) {
 		// Create the ontology manager and add ontology factories, mappers and storers
 		OWLOntologyManager ontologyManager = binding
 				.getOWLOntologyManager(dataFactory);
-		ontologyManager.addOntologyStorer(new RDFXMLOntologyStorer());
-		ontologyManager.addOntologyStorer(new OWLXMLOntologyStorer());
-		ontologyManager
-				.addOntologyStorer(new OWLFunctionalSyntaxOntologyStorer());
-		ontologyManager
-				.addOntologyStorer(new ManchesterOWLSyntaxOntologyStorer());
-		ontologyManager.addOntologyStorer(new OBOFlatFileOntologyStorer());
-		ontologyManager.addOntologyStorer(new KRSS2OWLSyntaxOntologyStorer());
-		ontologyManager.addOntologyStorer(new TurtleOntologyStorer());
-		ontologyManager.addOntologyStorer(new LatexOntologyStorer());
 		ontologyManager.addIRIMapper(new NonMappingOntologyIRIMapper());
 		ontologyManager
 				.addOntologyFactory(new AlternateEmptyInMemOWLOntologyFactory());
 		ontologyManager
 				.addOntologyFactory(new AlternateParsableOWLOntologyFactory());
+
+		List<OWLOntologyStorerFactory> allFactories = storerRegistry.getStorerFactories();
+		addOntologyStorers(ontologyManager, allFactories);
+
 		return ontologyManager;
+	}
+
+	private static void addOntologyStorers(OWLOntologyManager ontologyManager, List<OWLOntologyStorerFactory> storerFactories) {
+		if(storerFactories != null) {
+			for(OWLOntologyStorerFactory nextFactory : storerFactories) {
+				OWLOntologyStorer createdStorer = nextFactory.createStorer();
+				ontologyManager.addOntologyStorer(createdStorer);
+			}
+		}
 	}
 
 	/**
