@@ -2,11 +2,36 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>owlapitools-concurrentimpl</artifactId>
 	<packaging>jar</packaging>
-	<name>owlapitools-concurrentimpl</name>
+	<name>OWLAPI-Tools :: Concurrent Implementation</name>
 	<parent>
 		<groupId>net.sourceforge.owlapi</groupId>
 		<artifactId>owlapitools-parent</artifactId>
 		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>com.github.ansell.owlapi</groupId>
+			<artifactId>owlapi-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ansell.owlapi</groupId>
+			<artifactId>owlapi-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ansell.owlapi</groupId>
+			<artifactId>owlapi-rio</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-rdfxml</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
